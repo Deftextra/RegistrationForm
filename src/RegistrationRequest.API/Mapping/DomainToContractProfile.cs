@@ -11,6 +11,7 @@ namespace RegistrationRequest.API.Mapping
         public DomainToContractProfile()
         {
             CreateMap<Registration, RegistrationResponse>();
+            CreateMap<Address, AddressResponse>();
         }
     }
 }
