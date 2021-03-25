@@ -1,3 +1,4 @@
+using System.Security.Permissions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,17 @@ namespace RegistrationRequest.API
             services.AddControllers();
             services.AddInfrastructure(Configuration);
             services.AddAutoMapper(typeof(Startup));
+
+            
+            services.AddCors(options =>
+            {   
+                options.AddPolicy(Configuration["CorsPolicies:Default"], builder =>
+                {
+                    builder.AllowAnyOrigin();
+                });
+            });
+            
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Registration.API", Version = "v1" });
@@ -38,6 +50,7 @@ namespace RegistrationRequest.API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Registration.API v1"));
+                app.UseCors(Configuration["CorsPolicies:Default"]);
             }
 
             app.UseHttpsRedirection();

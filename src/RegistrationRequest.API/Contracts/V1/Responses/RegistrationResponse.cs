@@ -1,7 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using RegistrationRequest.API.Domain.Models;
-
-namespace RegistrationRequest.API.Contracts.V1.Responses
+﻿namespace RegistrationRequest.API.Contracts.V1.Responses
 {
     public class RegistrationResponse
     {
