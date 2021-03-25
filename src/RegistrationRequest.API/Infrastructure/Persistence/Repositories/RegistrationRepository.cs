@@ -15,6 +15,7 @@ namespace RegistrationRequest.API.Infrastructure.Persistence.Repositories
 
         public RegistrationRepository(AppDbContext context, IMapper mapper) : base(context)
         {
+            
             _mapper = mapper;
         }
 
