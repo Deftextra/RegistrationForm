@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RegistrationRequest.API.Infrastructure;
 
 namespace RegistrationRequest.API
 {
@@ -21,6 +22,8 @@ namespace RegistrationRequest.API
         {
 
             services.AddControllers();
+            services.AddInfrastructure(Configuration);
+            services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Registration.API", Version = "v1" });
