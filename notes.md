@@ -53,9 +53,9 @@ Please confirm that you have received the interview agenda.
 ----
 ### Registration
 * First name
-* Last name
+* Last nme
 * Mobile number
-* Addres
+* Address
   1. Check if address is valid
 
 * Email
@@ -63,11 +63,19 @@ Please confirm that you have received the interview agenda.
   2. Check if email exists (add maybe later)
 ---
 
-* We seperate the domain models from our boundary models. 
+* We separate the domain models from our boundary models. 
   This keeps our endpoints consistent for consumption even if the domain logic changes.
 * We use the Repository pattern.
+   * A repository holds the appDbContext, that is, it only keeps track of in memory changes to our entities.
 
 * We name the project RegistrationRequest, because we do not want to confuse with actually creating a userIdentity with credentials. 
+* We structure our project following jason taylow apploach, but without the application layer, which is merged inside with the infrastructure.
+
+* We apply the request and Response pattern.
+  This pattern gives us some advantages, such as:
+	*If we need to change our service to receive more parameters, we don’t have to break its signature;
+	*We can define a standard contract for our request and/or responses;
+	*We can handle business logic and potential fails without stopping the application process, and we won’t need to use tons of try-catch blocks.
 
 
 ## Front-end

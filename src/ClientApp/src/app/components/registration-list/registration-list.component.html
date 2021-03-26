@@ -1,0 +1,36 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Mobile number</th>
+    <th scope="col">Email Address</th>
+    <th scope="col"> Address </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let registration of registrations">
+    <th scope="row">{{ registration.id }}</th>
+      <td> {{ registration.firstName + " " + registration.lastName}}</td>
+    <td>{{ registration.phoneNumber }}</td>
+    <td>{{ registration.emailAddress  }}</td> 
+    <td> 
+        <button class="btn btn-primary">Show Address</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRegistrations()">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshRegistrations()">
+    <option [ngValue]="2">2 items per page</option>
+    <option [ngValue]="4">4 items per page</option>
+    <option [ngValue]="6">6 items per page</option>
+  </select>
+</div>
+
+<app-address></app-address>
+

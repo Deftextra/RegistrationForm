@@ -1,0 +1,172 @@
+<div class="card">
+  <h4 class="card-header">Register</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="col">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            formControlName="firstName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+          />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors?.required">
+              First Name is required
+            </div>
+            <div *ngIf="f.firstName.errors?.maxLength">
+              First Name must be less than 10 characters
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            formControlName="lastName"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+          />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            <div *ngIf="f.lastName.errors.maxLength">
+              Last Name must be less than 10 characters
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Mobile Number</label>
+        <input
+          type="tel"
+          formControlName="phoneNumber"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }"
+        />
+        <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+          <div *ngIf="f.phoneNumber.errors.required">
+            Phone number is required
+          </div>
+          <div *ngIf="f.phoneNumber.errors.pattern">
+            Please enter a valid phone number
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="emailAddress">Email</label>
+        <input
+          type="email"
+          formControlName="emailAddress"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"
+        />
+        <div
+          *ngIf="submitted && f.emailAddress.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.emailAddress.errors?.required">
+            Password is required
+          </div>
+          <div *ngIf="f.emailAddress.errors?.email">
+            Please enter a valid email address
+          </div>
+        </div>
+      </div>
+
+      <h4>Address</h4>
+
+      <div class="form-group">
+        <label for="country"> Country</label>
+        <input
+          type="email"
+          formControlName="country"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.country.errors }"
+        />
+        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+          <div *ngIf="f.country.errors?.required">Password is required</div>
+          <div *ngIf="f.country.errors?.email">
+            Please enter a valid email address
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="street"> Street</label>
+        <input
+          type="email"
+          formControlName="street"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.street.errors }"
+        />
+        <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+          <div *ngIf="f.street.errors?.required">Password is required</div>
+          <div *ngIf="f.street.errors?.email">
+            Please enter a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="city"> City </label>
+          <input
+            type="email"
+            formControlName="city"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.city.errors }"
+          />
+          <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors?.required">Password is required</div>
+            <div *ngIf="f.city.errors?.email">
+              Please enter a valid email address
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="state"> State</label>
+          <input
+            type="email"
+            formControlName="state"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.street.errors }"
+          />
+          <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+            <div *ngIf="f.state.errors?.required">Password is required</div>
+            <div *ngIf="f.state.errors?.email">
+              Please enter a valid email address
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="postalCode"> Postal Code </label>
+          <input
+            type="email"
+            formControlName="postalCode"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.street.errors }"
+          />
+          <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+            <div *ngIf="f.postalCode.errors?.required">Password is required</div>
+            <div *ngIf="f.postalCode.errors?.email">
+              Please enter a valid email address
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          Register
+        </button>
+        <a routerLink="../login" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
