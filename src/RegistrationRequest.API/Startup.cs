@@ -32,6 +32,7 @@ namespace RegistrationRequest.API
                 options.AddPolicy(Configuration["CorsPolicies:Default"], builder =>
                 {
                     builder.AllowAnyOrigin();
+                    builder.AllowAnyHeader();
                 });
             });
             
