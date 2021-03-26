@@ -3,9 +3,9 @@ using RegistrationRequest.API.Domain.Models;
 
 namespace RegistrationRequest.API.Contracts.V1.Responses
 {
-    public class CreateRegistrationResponse : BaseResponse
+    public class SaveRegistrationResponse : BaseResponse
     {
-        private CreateRegistrationResponse(bool success, string message, Registration registration) : base(success,
+        private SaveRegistrationResponse(bool success, string message, Registration registration) : base(success,
             message)
         {
             Registration = registration;
@@ -16,7 +16,7 @@ namespace RegistrationRequest.API.Contracts.V1.Responses
         /// </summary>
         /// <param name="category">Saved category.</param>
         /// <returns>Response.</returns>
-        public CreateRegistrationResponse(Registration category) : this(true, string.Empty, category)
+        public SaveRegistrationResponse(Registration category) : this(true, string.Empty, category)
         {
         }
 
@@ -25,7 +25,7 @@ namespace RegistrationRequest.API.Contracts.V1.Responses
         /// </summary>
         /// <param name="message">Error message.</param>
         /// <returns>Response.</returns>
-        public CreateRegistrationResponse(string message) : this(false, message, null)
+        public SaveRegistrationResponse(string message) : this(false, message, null)
         {
         }
 
