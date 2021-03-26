@@ -23,43 +23,75 @@ namespace RegistrationRequest.API.Controllers.V1
             _mapper = mapper;
         }
 
-        // GET api/Registrations/{id}
         [HttpGet("{id}")]
-        public async Task<string> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return "ok";
+            var registration = await _registrationService.GetRegistrationByIdAsync(id);
+            
+            if (registration == null)
+            {
+                return NotFound();
+            }
+
+            var registrationResponse = _mapper.Map<Registration, RegistrationResponse>(registration);
+            
+            return Ok(registrationResponse);
+            
         }
 
-        // POST api/Registrations/create
-        [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] CreateRegistrationRequest createRequest)
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] SaveRegistrationRequest createRequest)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState.GetErrorMessages());
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
 
-            var registration = _mapper.Map<CreateRegistrationRequest, Registration>(createRequest);
+            var registration = _mapper.Map<SaveRegistrationRequest, Registration>(createRequest);
 
             var result = await _registrationService.CreateRegistrationAsync(registration);
 
-            if (!result.Success) return BadRequest(result.Message);
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
 
             var registrationResponse = _mapper.Map<Registration, RegistrationResponse>(result.Registration);
 
             return Ok(registrationResponse);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> Update([FromBody] UpdateRegistrationRequest updateRequest)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] SaveRegistrationRequest updateRequest)
         {
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.GetErrorMessages());
+            }
+
+            var registration = _mapper.Map<SaveRegistrationRequest, Registration>(updateRequest);
+
+            var result = await _registrationService.UpdateRegistrationByIdAsync(id, registration);
+            
+            if (result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+            
+            var registrationResponse = _mapper.Map<Registration, RegistrationResponse>(result.Registration);
+
+            return Ok(registrationResponse);
+
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var registrations = await _registrationService.GetAllRegistrationsAsync();
             var registrationsResponse =
                 _mapper.Map<IEnumerable<Registration>, IEnumerable<RegistrationResponse>>(registrations);
-            return Ok();
+            return Ok(registrationsResponse);
         }
     }
+
 }

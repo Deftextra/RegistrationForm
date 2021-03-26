@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -15,8 +17,15 @@ namespace RegistrationRequest.API.Infrastructure.Persistence.Repositories
 
         public RegistrationRepository(AppDbContext context, IMapper mapper) : base(context)
         {
-            
             _mapper = mapper;
+        }
+
+        public async Task<Registration> GetRegistrationByIdAsync(int id)
+        {
+            return await _context.Registrations
+                .Include(dto => dto.Address)
+                .ProjectTo<Registration>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync(dto => dto.Id == id);
         }
 
         public async Task<IEnumerable<Registration>> GetAllRegistrationsAsync()
@@ -30,6 +39,12 @@ namespace RegistrationRequest.API.Infrastructure.Persistence.Repositories
         public async Task CreateRegistrationAsync(Registration registration)
         {
             await _context.Registrations.AddAsync(_mapper.Map<Registration, RegistrationDto>(registration));
+        }
+
+        public void  UpdateRegistrationByIdAsync(Registration registration)
+        {
+            var registrationDto = _mapper.Map<Registration, RegistrationDto>(registration);
+             _context.Registrations.Update(registrationDto);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace RegistrationRequest.API.Infrastructure.Services
     public interface IRegistrationService
     {
         Task<IEnumerable<Registration>> GetAllRegistrationsAsync();
-        Task<CreateRegistrationResponse> CreateRegistrationAsync(Registration registration);
-        // Task<Registration> GetRegistrationByIdAsync(int id);
-        // Task<Registration> UpDateRegistration();
+        Task<SaveRegistrationResponse> CreateRegistrationAsync(Registration registration);
+        Task<Registration> GetRegistrationByIdAsync(int id);
+        Task<SaveRegistrationResponse> UpdateRegistrationByIdAsync(int id, Registration registration);
     }
 }

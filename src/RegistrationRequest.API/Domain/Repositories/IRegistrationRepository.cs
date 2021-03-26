@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using RegistrationRequest.API.Contracts.V1.Responses;
 using RegistrationRequest.API.Domain.Models;
+using RegistrationRequest.API.Domain.Repositories.Models;
 
 namespace RegistrationRequest.API.Domain.Repositories
 {
     public interface IRegistrationRepository
     {
+        Task<Registration> GetRegistrationByIdAsync(int id);
         Task<IEnumerable<Registration>> GetAllRegistrationsAsync();
         Task CreateRegistrationAsync(Registration registration);
+        void UpdateRegistrationByIdAsync(Registration registration);
+        
     }
 }
