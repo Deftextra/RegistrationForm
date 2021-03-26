@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using RegistrationRequest.API.Contracts.V1.Responses;
@@ -25,22 +26,42 @@ namespace RegistrationRequest.API.Infrastructure.Services
             return await  _registrationRepository.GetAllRegistrationsAsync();
         }
 
-        public async Task<CreateRegistrationResponse> CreateRegistrationAsync(Registration registration)
+        public async Task<SaveRegistrationResponse> CreateRegistrationAsync(Registration registration)
         {
             try
             {
                 await _registrationRepository.CreateRegistrationAsync(registration);
                 await _unitOfWork.CompleteAsync();
 
-                return new CreateRegistrationResponse(registration);
+                return new SaveRegistrationResponse(registration);
 
             }
             catch (Exception ex)
             {
-                return new CreateRegistrationResponse(
+                return new SaveRegistrationResponse(
                     $"An error occured during creation of the registration: {ex.Message}");
             }
         }
 
+        public async Task<Registration> GetRegistrationByIdAsync(int id)
+        {
+            return await _registrationRepository.GetRegistrationByIdAsync(id);
+        }
+
+        public async Task<SaveRegistrationResponse> UpdateRegistrationByIdAsync(int id, Registration registration)
+        {
+            try
+            {
+                _registrationRepository.UpdateRegistrationByIdAsync(registration);
+                await _unitOfWork.CompleteAsync();
+
+                return new(registration);
+            }
+            catch (Exception ex)
+            {
+                return new SaveRegistrationResponse(
+                    $"An error occured during update of the registration: {ex.Message}");
+            }
+        }
     }
 }
