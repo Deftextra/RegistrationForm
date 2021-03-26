@@ -9,7 +9,7 @@ namespace RegistrationRequest.API.Mapping
         public DtoToDomainProfile()
         {
             CreateMap<RegistrationDto, Registration>();
-            CreateMap<AddresssDto, AddresssDto>();
+            CreateMap<AddresssDto, Address>();
         }
     }
 }
