@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using RegistrationRequest.API.Domain.Models;
-using RegistrationRequest.API.Domain.Repositories.Models;
 
 namespace RegistrationRequest.API.Domain.Repositories
 {
@@ -11,6 +10,5 @@ namespace RegistrationRequest.API.Domain.Repositories
         Task<IEnumerable<Registration>> GetAllRegistrationsAsync();
         Task CreateRegistrationAsync(Registration registration);
         void UpdateRegistrationByIdAsync(Registration registration);
-        
     }
 }

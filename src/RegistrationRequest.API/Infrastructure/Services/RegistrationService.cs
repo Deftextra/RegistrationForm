@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using RegistrationRequest.API.Contracts.V1.Responses;
 using RegistrationRequest.API.Domain.Models;
 using RegistrationRequest.API.Domain.Repositories;
 
 namespace RegistrationRequest.API.Infrastructure.Services
 {
-    public class RegistrationService: IRegistrationService
+    public class RegistrationService : IRegistrationService
     {
         private readonly IRegistrationRepository _registrationRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +20,7 @@ namespace RegistrationRequest.API.Infrastructure.Services
 
         public async Task<IEnumerable<Registration>> GetAllRegistrationsAsync()
         {
-            return await  _registrationRepository.GetAllRegistrationsAsync();
+            return await _registrationRepository.GetAllRegistrationsAsync();
         }
 
         public async Task<SaveRegistrationResponse> CreateRegistrationAsync(Registration registration)
@@ -34,7 +31,6 @@ namespace RegistrationRequest.API.Infrastructure.Services
                 await _unitOfWork.CompleteAsync();
 
                 return new SaveRegistrationResponse(registration);
-
             }
             catch (Exception ex)
             {
@@ -55,7 +51,7 @@ namespace RegistrationRequest.API.Infrastructure.Services
                 _registrationRepository.UpdateRegistrationByIdAsync(registration);
                 await _unitOfWork.CompleteAsync();
 
-                return new(registration);
+                return new SaveRegistrationResponse(registration);
             }
             catch (Exception ex)
             {

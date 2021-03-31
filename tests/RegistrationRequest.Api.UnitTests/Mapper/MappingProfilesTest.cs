@@ -16,29 +16,16 @@ namespace RegistrationRequest.Api.UnitTests.Mapper
         public MappingProfilesTest()
         {
             if (_sut == null)
+            {
                 _sut = new MapperConfiguration(mc =>
                     {
                         mc.AddProfile(new DomainToContractProfile());
                         mc.AddProfile(new DtoToDomainProfile());
                     })
                     .CreateMapper();
+            }
         }
 
-
-
-        [Theory]
-        [MemberData(nameof(AddressMappingData))]
-        public async Task Mapper_MapsAddresssToAddressResponse_WhenModelsValid(Address address,
-            AddressResponse expectedAddress)
-        {
-            // Arrange
-
-            // Act
-            var result = _sut.Map<Address, AddressResponse>(address);
-            //Assert
-            result.Should().BeEquivalentTo(expectedAddress);
-        }
-        
         public static IEnumerable<object[]> AddressMappingData =>
             new List<object[]>
             {
@@ -65,5 +52,19 @@ namespace RegistrationRequest.Api.UnitTests.Mapper
                     }
                 }
             };
+
+
+        [Theory]
+        [MemberData(nameof(AddressMappingData))]
+        public async Task Mapper_MapsAddresssToAddressResponse_WhenModelsValid(Address address,
+            AddressResponse expectedAddress)
+        {
+            // Arrange
+
+            // Act
+            var result = _sut.Map<Address, AddressResponse>(address);
+            //Assert
+            result.Should().BeEquivalentTo(expectedAddress);
+        }
     }
 }

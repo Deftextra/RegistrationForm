@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Metadata;
-using RegistrationRequest.API.Domain.Models;
 
 namespace RegistrationRequest.API.Domain.Repositories.Models
 {

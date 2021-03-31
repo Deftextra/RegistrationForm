@@ -24,23 +24,24 @@ namespace RegistrationRequest.API.Controllers.V1
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute]
+            int id)
         {
             var registration = await _registrationService.GetRegistrationByIdAsync(id);
-            
+
             if (registration == null)
             {
                 return NotFound();
             }
 
             var registrationResponse = _mapper.Map<Registration, RegistrationResponse>(registration);
-            
+
             return Ok(registrationResponse);
-            
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SaveRegistrationRequest createRequest)
+        public async Task<IActionResult> Create([FromBody]
+            SaveRegistrationRequest createRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +63,9 @@ namespace RegistrationRequest.API.Controllers.V1
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] SaveRegistrationRequest updateRequest)
+        public async Task<IActionResult> Update([FromRoute]
+            int id, [FromBody]
+            SaveRegistrationRequest updateRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -72,26 +75,25 @@ namespace RegistrationRequest.API.Controllers.V1
             var registration = _mapper.Map<SaveRegistrationRequest, Registration>(updateRequest);
 
             var result = await _registrationService.UpdateRegistrationByIdAsync(id, registration);
-            
+
             if (result.Success)
             {
                 return BadRequest(result.Message);
             }
-            
+
             var registrationResponse = _mapper.Map<Registration, RegistrationResponse>(result.Registration);
 
             return Ok(registrationResponse);
-
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var registrations = await _registrationService.GetAllRegistrationsAsync();
+
             var registrationsResponse =
                 _mapper.Map<IEnumerable<Registration>, IEnumerable<RegistrationResponse>>(registrations);
             return Ok(registrationsResponse);
         }
     }
-
 }

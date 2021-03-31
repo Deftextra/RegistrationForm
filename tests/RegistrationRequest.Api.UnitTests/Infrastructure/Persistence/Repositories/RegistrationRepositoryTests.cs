@@ -22,27 +22,28 @@ namespace RegistrationRequest.Api.UnitTests.Infrastructure.Persistence.Repositor
             builder.UseInMemoryDatabase("FormsDbInMemory");
             var dbContextOptions = builder.Options;
 
-            _appDbContext = new AppDbContext(options: dbContextOptions);
-            
+            _appDbContext = new AppDbContext(dbContextOptions);
+
             // Delete existing db before creating a new one
             _appDbContext.Database.EnsureDeleted();
             _appDbContext.Database.EnsureCreated();
 
             if (_mapper == null)
+            {
                 _mapper = new MapperConfiguration(mc =>
                     {
                         mc.AddProfile(new DomainToContractProfile());
                         mc.AddProfile(new DtoToDomainProfile());
                     })
                     .CreateMapper();
-            
+            }
+
             _sut = new RegistrationRepository(_appDbContext, _mapper);
         }
 
         [Fact]
         public async Task GetAllRegistrationsAsync_ShouldReturnAllRegistrations_WhenRegistrationsExist()
         {
-            
         }
     }
 }

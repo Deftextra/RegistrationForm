@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.VisualBasic;
 using Moq;
 using RegistrationRequest.API.Domain.Models;
 using RegistrationRequest.API.Domain.Repositories;
@@ -24,7 +23,7 @@ namespace RegistrationRequest.Api.UnitTests.Infrastructure.Services
         }
 
         [Theory]
-        [MemberData(nameof(RegistrationServiceData.GetRegistrationsTestData),parameters:1,
+        [MemberData(nameof(RegistrationServiceData.GetRegistrationsTestData), 1,
             MemberType = typeof(RegistrationServiceData))]
         public async Task GetAllRegistration_ShouldReturnAllRegistrations_WhenRegistrationsExist(
             IList<Registration> registrations, IList<Registration> expectedRegistrations)

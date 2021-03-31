@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -41,10 +39,10 @@ namespace RegistrationRequest.API.Infrastructure.Persistence.Repositories
             await _context.Registrations.AddAsync(_mapper.Map<Registration, RegistrationDto>(registration));
         }
 
-        public void  UpdateRegistrationByIdAsync(Registration registration)
+        public void UpdateRegistrationByIdAsync(Registration registration)
         {
             var registrationDto = _mapper.Map<Registration, RegistrationDto>(registration);
-             _context.Registrations.Update(registrationDto);
+            _context.Registrations.Update(registrationDto);
         }
     }
 }

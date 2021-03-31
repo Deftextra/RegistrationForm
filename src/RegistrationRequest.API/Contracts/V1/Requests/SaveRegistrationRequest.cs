@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using RegistrationRequest.API.Domain.Models;
 
 namespace RegistrationRequest.API.Contracts.V1.Requests
 {
@@ -7,13 +6,17 @@ namespace RegistrationRequest.API.Contracts.V1.Requests
     {
         [Required]
         public string FirstName { get; set; }
+
         [Required]
         public string LastName { get; set; }
+
         [Phone]
         public string PhoneNumber { get; set; }
+
         [EmailAddress]
         [Required]
         public string EmailAddress { get; set; }
+
         public SaveAddressRequest Address { get; set; }
     }
 }

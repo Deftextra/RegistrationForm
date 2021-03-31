@@ -10,12 +10,16 @@ namespace RegistrationRequest.API.Contracts.V1.Requests
         [Required]
         [FromRoute]
         public int Id { get; set; }
+
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+
         [Phone]
         public string? PhoneNumber { get; set; }
+
         [EmailAddress]
         public string? EmailAddress { get; set; }
+
         public Address Address { get; set; }
     }
 }

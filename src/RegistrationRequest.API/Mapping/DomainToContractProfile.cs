@@ -1,9 +1,6 @@
-﻿using System.ComponentModel;
-using AutoMapper;
-using RegistrationRequest.API.Contracts.V1.Requests;
+﻿using AutoMapper;
 using RegistrationRequest.API.Contracts.V1.Responses;
 using RegistrationRequest.API.Domain.Models;
-using RegistrationRequest.API.Domain.Repositories.Models;
 
 namespace RegistrationRequest.API.Mapping
 {

@@ -10,6 +10,6 @@ namespace RegistrationRequest.API.Mapping
         {
             CreateMap<Registration, RegistrationDto>();
             CreateMap<Address, AddresssDto>();
-       }
+        }
     }
 }
