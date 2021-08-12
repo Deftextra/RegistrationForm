@@ -1,0 +1,15 @@
+trigger:
+- main
+
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+  - stage: "name of the stage"
+    jobs:
+      - job: 
+        steps:
+          - script: echo "hello world"
+
+    
